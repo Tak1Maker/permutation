@@ -6,7 +6,7 @@ bool IsPerumted(string word1, string word2)
 
     var word2List = CountNumbersOfLetters(word2);
 
-    var count = 0;
+    var verifyWord = 0;
 
     if (word1List.Count != word2List.Count)
         return false;
@@ -17,13 +17,13 @@ bool IsPerumted(string word1, string word2)
             for (int i = 0; i < word2List.Count; i++)
             {
                 if (word.Equals(word2List[i]))
-                    count++;
+                    verifyWord++;
             }
 
             Console.WriteLine($"{word.Letter}, {word.NbLetters}");
         }
 
-        if (count == word1List.Count)
+        if (verifyWord == word1List.Count)
             return true;
         else return false;
     }
