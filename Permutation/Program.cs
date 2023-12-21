@@ -1,35 +1,71 @@
 ﻿//Given 2 strings, write a method to decide if one is a permutation of the other.
 // Explanation, if 2 words have the same letters in same quantity, its an permutation bcs its an anagram.
-
-bool IsPermuted(string word1, string word2)
+bool IsPerumted(string word1, string word2)
 {
-    //1. 
-    bool isPerm = false;
-    //2. 
-    if (word1.Length != word2.Length)
-        isPerm = false;
+    var word1List = CountNumbersOfLetters(word1);
+
+    var word2List = CountNumbersOfLetters(word2);
+
+    var count = 0;
+
+    if (word1List.Count != word2List.Count)
+        return false;
     else
     {
-        var t = 0;
-    
-        for (int i = 0; i < word1.Length; i++)
+        foreach (var word in word1List)
         {
-            var n = 0;
-            for(int l = 0; l < word1.Length; l++)
+            for (int i = 0; i < word2List.Count; i++)
             {
-                if (word1[i] == word2[l] && n <= 1)
-                {
-                    t++;
-                    n++;
-                }
+                if (word.Equals(word2List[i]))
+                    count++;
             }
+
+            Console.WriteLine($"{word.Letter}, {word.NbLetters}");
         }
 
-        if (t == word1.Length)
-            isPerm = true;
+        if (count == word1List.Count)
+            return true;
+        else return false;
     }
-    
-    return isPerm;
 }
 
-Console.WriteLine(IsPermuted("luca","calu"));
+List<Word> CountNumbersOfLetters(string word)
+{
+    var numbers = new List<Word>();
+
+    foreach(var letter in word)
+    {
+        if (!numbers.Any(x => x.Letter == letter.ToString()))
+        {
+            numbers.Add(new Word(letter.ToString(), 1));
+        }
+        else
+        {
+            var nb = numbers.Where(x => x.Letter == letter.ToString()).Single();
+
+            nb.NbLetters++;
+        }
+    }
+
+    return numbers;
+}
+
+Console.WriteLine(IsPerumted("eell", "llee"));
+public class Word
+{
+    public string Letter { get; set; }
+    public int NbLetters { get; set; }
+
+    public Word(string letter, int nbLetters)
+    {
+        Letter = letter;
+        NbLetters = nbLetters;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        Word p = (Word)obj;
+
+        return (Letter == p.Letter) && (NbLetters == p.NbLetters);
+    }
+}
