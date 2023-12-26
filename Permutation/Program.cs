@@ -33,16 +33,17 @@ bool IsPerumtedQuadratique(string word1, string word2)
 
 List<int> Tri(List<int> numbers)
 {
-
     for(int i = 0; i < numbers.Count - 1; i++)
     {
         var temp = 0; 
-
-        if(numbers[i] > numbers[i + 1])
+        for(int j = 0; j < i - 1 ; j++)
         {
-            temp = numbers[i + 1];
-            numbers[i + 1] = numbers[i];
-            numbers[i] = temp;
+            if (numbers[i] > numbers[i + 1])
+            {
+                temp = numbers[i + 1];
+                numbers[i + 1] = numbers[i];
+                numbers[i] = temp;
+            }
         }
     }
     return numbers;
@@ -53,7 +54,9 @@ List<int> numbers = new List<int>() { 1, 20, 12, 17, 55, 9 };
 numbers.ForEach(x => Console.Write($"{x}-"));
 
 var n = Tri(numbers);
+
 Console.WriteLine();
+
 n.ForEach(x => Console.Write($"{x}-"));
 
 void IsPermutedLogarithmique(string word1, string word2)
@@ -79,7 +82,7 @@ void IsPermutedLogarithmique(string word1, string word2)
     Console.WriteLine(word1Alphabet);
 }
 
-IsPermutedLogarithmique("tttsavb", "word2");
+//IsPermutedLogarithmique("tttsavb", "word2");
 
 static string SortString(string input)
 {
