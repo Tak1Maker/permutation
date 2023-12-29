@@ -33,19 +33,19 @@ bool IsPerumtedQuadratique(string word1, string word2)
 
 List<int> Tri(List<int> numbers)
 {
-    for(int i = 0; i < numbers.Count - 1; i++)
+    for (int i = numbers.Count - 1; i >= 1; i--)
     {
-        var temp = 0; 
-        for(int j = 0; j < i - 1 ; j++)
+        for (int j = 1; j <= i; j++)
         {
-            if (numbers[i] > numbers[i + 1])
+            if (numbers[j - 1] > numbers[j])
             {
-                temp = numbers[i + 1];
-                numbers[i + 1] = numbers[i];
-                numbers[i] = temp;
+                int temp = numbers[j - 1];
+                numbers[j - 1] = numbers[j];
+                numbers[j] = temp;
             }
-        }
+        }   
     }
+        
     return numbers;
 }
 
